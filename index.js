@@ -2,6 +2,6 @@
 
 module.exports = {
   rules: {
-    'energy-hotspot': require('./lib/rules/energy-hotspot')
+    'energy-hotspot': require('./src/rules/energy-hotspot')
   }
 };
