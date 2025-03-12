@@ -1,5 +1,5 @@
 {
-    "name": "eslint-energy-hotspot",
+    "name": "eslint-plugin-cs4575-g5",
     "version": "1.0.0",
     "description": "ESLint custom rule to detect energy hotspots in React code",
     "main": "index.js",
