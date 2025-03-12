@@ -1,0 +1,18 @@
+{
+    "name": "eslint-energy-hotspot",
+    "version": "1.0.0",
+    "description": "ESLint custom rule to detect energy hotspots in React code",
+    "main": "index.js",
+    "keywords": [
+      "eslint",
+      "react",
+      "performance",
+      "energy",
+      "hotspot"
+    ],
+    "author": "Your Name",
+    "license": "MIT",
+    "peerDependencies": {
+      "eslint": "^7.0.0 || ^8.0.0"
+    }
+  }
