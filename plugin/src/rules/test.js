@@ -5,7 +5,6 @@ module.exports = {
     type: 'suggestion',
     docs: {
       description: 'This is a test rule',
-      category: 'Test',
       recommended: false,
     },
     schema: [] // No options

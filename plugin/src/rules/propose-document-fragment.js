@@ -5,7 +5,6 @@ module.exports = {
     type: 'suggestion',
     docs: {
       description: 'Propose using createDocumentFragment instead of adding children multiple times',
-      category: 'Test',
       recommended: true,
     },
     schema: [] // No options

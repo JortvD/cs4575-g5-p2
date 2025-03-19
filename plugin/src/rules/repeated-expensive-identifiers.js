@@ -9,7 +9,6 @@ module.exports = {
     type: 'suggestion',
     docs: {
       description: 'Warn when expensive methods "getComputedStyle, getClientBoundingRect and offsetHeight/offsetWidth" are called multiple times or in a loop',
-      category: 'Test',
       recommended: true,
     },
     schema: [] // No options
