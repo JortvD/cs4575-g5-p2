@@ -1,1 +1,4 @@
-while(true) { document.appendChild(document.createElement('div')); }
+function test2() {
+	document.body.getBoundingClientRect();
+	document.body.getBoundingClientRect();
+}

@@ -16,15 +16,21 @@ module.exports = {
         if (node.callee.property && node.callee.property.name === 'appendChild') {
           let current = node;
 
+          const loopTypes = ['ForStatement', 'WhileStatement'];
+
           while (current) {
-            if (current.type === 'ForStatement' || current.type === 'WhileStatement') {
-              context.report({
-                node,
-                message: 'Avoid using appendChild inside a loop. Consider using createDocumentFragment instead.',
-              });
-              break;
+            if (!loopTypes.includes(current.type)) {
+              current = current.parent;
+  
+              continue;
             }
-            current = current.parent;
+
+            context.report({
+              node,
+              message: 'Avoid using appendChild inside a loop. Consider using createDocumentFragment instead.',
+            });
+
+            break;
           }
         }
       }

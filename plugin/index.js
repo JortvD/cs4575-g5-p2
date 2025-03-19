@@ -9,5 +9,6 @@ module.exports = {
     'no-multiple-imgs': require('./src/rules/no-multiple-imgs'),
     'test': require('./src/rules/test'),
     'propose-document-fragment': require('./src/rules/propose-document-fragment'),
+    'repeated-expensive-identifiers': require('./src/rules/repeated-expensive-identifiers'),
   }
 };
