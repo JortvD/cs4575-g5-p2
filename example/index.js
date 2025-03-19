@@ -1,0 +1,1 @@
+while(true) { document.appendChild(document.createElement('div')); }

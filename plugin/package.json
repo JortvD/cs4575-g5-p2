@@ -10,7 +10,7 @@
         "energy",
         "hotspot"
     ],
-    "author": "Your Name",
+    "author": "",
     "license": "MIT",
     "peerDependencies": {
         "eslint": "^8.57.1"
