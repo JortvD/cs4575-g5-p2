@@ -16,21 +16,26 @@ module.exports = {
           let current = node;
 
           const loopTypes = ['ForStatement', 'WhileStatement'];
+          let isInsideLoop = false;
 
           while (current) {
             if (!loopTypes.includes(current.type)) {
               current = current.parent;
-  
               continue;
             }
 
-            context.report({
-              node,
-              message: 'Avoid using appendChild inside a loop. Consider using createDocumentFragment instead.',
-            });
-
+            isInsideLoop = true;
             break;
           }
+
+          if (!isInsideLoop) {
+            return;
+          }
+
+          context.report({
+            node,
+            message: 'Avoid using appendChild inside a loop. Consider using createDocumentFragment instead.',
+          });
         }
       }
     };
