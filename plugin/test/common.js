@@ -16,6 +16,6 @@ function CustomRuleTester(options) {
 
 module.exports = {
 	ruleTester: new CustomRuleTester({
-		parserOptions: { ecmaVersion: "latest", sourceType: 'module' },
+		parserOptions: { ecmaVersion: "latest", sourceType: 'module', ecmaFeatures: { jsx: true } },
 	}),
 }

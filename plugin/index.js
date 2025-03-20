@@ -11,5 +11,6 @@ module.exports = {
     'document-fragment': require('./src/rules/document-fragment'),
     'intersection-observer': require('./src/rules/intersection-observer'),
     'repeated-expensive-identifiers': require('./src/rules/repeated-expensive-identifiers'),
+    'lazy-elements': require('./src/rules/lazy-elements'),
   }
 };
