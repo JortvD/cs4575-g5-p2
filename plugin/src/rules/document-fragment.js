@@ -4,7 +4,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Propose using createDocumentFragment instead of adding children multiple times',
+      description: 'Suggest using createDocumentFragment instead of adding children multiple times',
       recommended: true,
     },
     schema: [] // No options

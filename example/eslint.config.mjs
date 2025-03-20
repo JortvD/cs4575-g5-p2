@@ -12,7 +12,7 @@ export default [
     },
     rules: {
       "sustainable-eslint-plugin/test": "error",
-      "sustainable-eslint-plugin/propose-document-fragment": "error",
+      "sustainable-eslint-plugin/document-fragment": "error",
       "sustainable-eslint-plugin/repeated-expensive-identifiers": "error",
     }
   }

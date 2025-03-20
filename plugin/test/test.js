@@ -1,3 +1,4 @@
 require("./rules/test");
-require("./rules/propose-document-fragment");
+require("./rules/document-fragment");
+require("./rules/intersection-observer");
 require("./rules/repeated-expensive-identifiers");
