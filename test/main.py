@@ -116,36 +116,7 @@ class ChromiumDownloader(ZipDownloader):
 		self.download(url)
 		self.unzip()
 		self.clean_zip()
-
-class UBlockDownloader(ZipDownloader):
-	def __init__(self):
-		super().__init__("uBlock Extension", DATA_FOLDER, 'ublock-extension.zip')
-
-	def get_folder(self):
-		return os.path.abspath(os.path.join(DATA_FOLDER, 'uBlock0.chromium'))
-
-	def run(self):
-		super().run()
-
-		url = 'https://github.com/gorhill/uBlock/releases/download/1.62.0/uBlock0_1.62.0.chromium.zip'
-		self.download(url)
-		self.unzip()
-		self.clean_zip()
-
-class GhosteryDownloader(ZipDownloader):
-	def __init__(self):
-		super().__init__("Ghostery Extension", DATA_FOLDER, 'ghostery-extension.zip')
-
-	def get_folder(self):
-		return os.path.abspath(os.path.join(DATA_FOLDER, 'ghostery.chromium'))
-
-	def run(self):
-		super().run()
-
-		url = 'https://github.com/ghostery/ghostery-extension/releases/download/v10.4.25/ghostery-chromium-10.4.25.zip'
-		self.download(url)
-		self.unzip("ghostery.chromium")
-		self.clean_zip()
+	
 
 class Chromium:
 	def __init__(self):
@@ -262,17 +233,15 @@ class Step:
 		# Give time for Chromium to open
 		await asyncio.sleep(5)
 
-		for site in self.site_set:
-			print(f'> Opening {site}')
-			subprocess.run(self.chromium.args(site))
-			# Give time for the tab to load
-			await asyncio.sleep(5)
-			
-			last_tab_id = self.chromium.get_last_tab_id()
-			self.chromium.close_tab(last_tab_id)
-
-			# Give time for the tab to close
-			await asyncio.sleep(1)
+		print(f'> Opening {self.file}')
+		subprocess.run(self.chromium.args(self.file))
+		# Give time for the tab to load
+		await asyncio.sleep(5)
+		
+		last_tab_id = self.chromium.get_last_tab_id()
+		self.chromium.close_tab(last_tab_id)
+		# Give time for the tab to close
+		await asyncio.sleep(1)
 
 		# Close Chromium
 		print('> Closing Chromium')
@@ -308,7 +277,7 @@ class StepSet:
 	async def reset_user_data(self):
 		print('> Resetting user data by deleting old folder')
 		self.chromium.create_user_folder()
-		args = self.chromium.args('chrome://newtab', self.extension_folders)
+		args = self.chromium.args('chrome://newtab')
 		print(f'> Starting Chromium to generate user data')
 		proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 		await asyncio.sleep(15)
@@ -365,10 +334,10 @@ class Experiment:
 		if self.add_warmup:
 			self.n_sets += 1
 
-		for i in zip(range(self.n_sets - self.index), files):
+		for i in range(self.n_sets - self.index):
 			i = self.index + i
 			print(f'Set {i + 1}/{self.n_sets}')
-			step_set = StepSet(i, self.n_sets, folder, files)
+			step_set = StepSet(i, self.n_sets, folder, self.files)
 			await step_set.run()
 
 args_def = argparse.ArgumentParser(description='Run our experiment with the Energibridge tool')
