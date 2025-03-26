@@ -1,0 +1,10 @@
+requests
+progressbar2
+psutil
+numpy
+matplotlib
+pandas
+scipy
+seaborn
+scipy
+tabulate
