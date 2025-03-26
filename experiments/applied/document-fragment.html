@@ -1,0 +1,43 @@
+<div id="rule-applied">
+  <div id="fragment-container"></div>
+</div>
+
+<style>
+  #fragment-container {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+  }
+  .item {
+    padding: 4px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    font-size: 8px;
+  }
+</style>
+
+<script>
+  const createItems = (count) => {
+    const items = [];
+    for (let i = 0; i < count; i++) {
+      const div = document.createElement('div');
+      div.className = 'item';
+      div.textContent = `${i + 1}`;
+      items.push(div);
+    }
+    return items;
+  };
+
+  const measurePerformance = () => {
+    const items = createItems(100_000);
+    const fragmentContainer = document.getElementById('fragment-container');
+
+    console.time('Rule Applied');
+    const fragment = document.createDocumentFragment();
+    items.forEach(item => fragment.appendChild(item));
+    fragmentContainer.appendChild(fragment);
+    console.timeEnd('Rule Applied');
+  };
+
+  window.addEventListener('load', measurePerformance);
+</script> 

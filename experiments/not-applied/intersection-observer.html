@@ -1,0 +1,54 @@
+<div id="rule-not-applied">
+  <div class="content-container">
+    <div class="spacer"></div>
+    <div class="target" id="scroll-target">Target Element</div>
+    <div class="spacer"></div>
+  </div>
+</div>
+
+<style>
+  .content-container {
+    height: 200vh;
+    position: relative;
+  }
+  .spacer {
+    height: 100vh;
+  }
+  .target {
+    height: 100px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 20px 0;
+  }
+  .visible {
+    background: #4CAF50;
+    color: white;
+  }
+</style>
+
+<script>
+  const measurePerformance = () => {
+    const scrollTarget = document.getElementById('scroll-target');
+    
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const rect = scrollTarget.getBoundingClientRect();
+          if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+            scrollTarget.classList.add('visible');
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+    
+    window.scrollTo(0, document.body.scrollHeight);
+  };
+
+  window.addEventListener('load', measurePerformance);
+</script> 

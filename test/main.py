@@ -277,26 +277,25 @@ class StepSet:
 	async def reset_user_data(self):
 		print('> Resetting user data by deleting old folder')
 		self.chromium.create_user_folder()
-		args = self.chromium.args('chrome://newtab')
-		print(f'> Starting Chromium to generate user data')
-		proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		await asyncio.sleep(15)
+		# args = self.chromium.args('chrome://newtab')
+		# print(f'> Starting Chromium to generate user data')
+		# proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		# await asyncio.sleep(15)
 
-		print('> Closing Chromium gracefully to generate Preferences file')
-		parent = psutil.Process(proc.pid)
-		for child in parent.children(recursive=True):
-			try:
-				child.kill()
-			except:
-				break
-		await asyncio.sleep(1)
-		self.chromium.close_all_tabs()
-		await asyncio.sleep(3)
-
+		# print('> Closing Chromium gracefully to generate Preferences file')
+		# parent = psutil.Process(proc.pid)
+		# for child in parent.children(recursive=True):
+		# 	try:
+		# 		child.kill()
+		# 	except:
+		# 		break
+		# await asyncio.sleep(1)
+		# self.chromium.close_all_tabs()
+		# await asyncio.sleep(3)
 
 	async def run(self):
 		start_time = time.time()
-		await self.reset_user_data()
+		# await self.reset_user_data()
 
 		for i, step in enumerate(self.steps):
 			print(f'Step {i + 1}/{len(self.steps)} (of total {self.n_sets * len(self.steps)}) -> file: {step.file}')

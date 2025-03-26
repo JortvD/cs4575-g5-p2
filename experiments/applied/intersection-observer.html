@@ -1,0 +1,47 @@
+<div id="rule-applied">
+  <div class="content-container">
+    <div class="spacer"></div>
+    <div class="target" id="observer-target">Target Element</div>
+    <div class="spacer"></div>
+  </div>
+</div>
+
+<style>
+  .content-container {
+    height: 200vh;
+    position: relative;
+  }
+  .spacer {
+    height: 100vh;
+  }
+  .target {
+    height: 100px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 20px 0;
+  }
+  .visible {
+    background: #4CAF50;
+    color: white;
+  }
+</style>
+
+<script>
+  const measurePerformance = () => {
+    const observerTarget = document.getElementById('observer-target');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
+    observer.observe(observerTarget);
+    window.scrollTo(0, document.body.scrollHeight);
+  };
+
+  window.addEventListener('load', measurePerformance);
+</script> 

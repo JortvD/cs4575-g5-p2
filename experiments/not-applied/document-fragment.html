@@ -1,0 +1,41 @@
+<div id="rule-not-applied">
+  <div id="direct-container"></div>
+</div>
+
+<style>
+  #direct-container {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+  }
+  .item {
+    padding: 4px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    font-size: 8px;
+  }
+</style>
+
+<script>
+  const createItems = (count) => {
+    const items = [];
+    for (let i = 0; i < count; i++) {
+      const div = document.createElement('div');
+      div.className = 'item';
+      div.textContent = `${i + 1}`;
+      items.push(div);
+    }
+    return items;
+  };
+
+  const measurePerformance = () => {
+    const directContainer = document.getElementById('direct-container');
+    const items = createItems(500_000);
+
+    console.time('Rule Not Applied');
+    items.forEach(item => directContainer.appendChild(item));
+    console.timeEnd('Rule Not Applied');
+  };
+
+  window.addEventListener('load', measurePerformance);
+</script> 

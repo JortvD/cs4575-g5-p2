@@ -12,6 +12,9 @@
     ],
     "author": "",
     "license": "MIT",
+    "scripts": {
+        "test": "node test/test.js"
+    },
     "peerDependencies": {
         "eslint": "^8.57.1"
     }
