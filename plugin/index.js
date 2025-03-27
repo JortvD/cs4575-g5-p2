@@ -14,6 +14,7 @@ module.exports = {
     'lazy-elements': require('./src/rules/lazy-elements'),
     'avoid-gif-canvas': require('./src/rules/avoid-gif-canvas'),
     'avoid-image-resize': require('./src/rules/avoid-image-resize'),
-    'prefer-standard-fonts': require('./src/rules/prefer-standard-fonts')
+    'prefer-standard-fonts': require('./src/rules/prefer-standard-fonts'),
+    'respect-bf-cache': require('./src/rules/respect-bf-cache'),
   }
 };

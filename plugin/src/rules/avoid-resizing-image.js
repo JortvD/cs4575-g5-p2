@@ -17,7 +17,7 @@ module.exports = {
         const attributes = node.attributes;
         const hasResizingAttribute = attributes.some(attr => {
           if (!attr.name) return false;
-          return ['width', 'height', 'style', 'className', 'class'].includes(attr.name.name);
+          return ['width', 'height', 'style'].includes(attr.name.name);
         });
 
         if (hasResizingAttribute) {
