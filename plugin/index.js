@@ -16,5 +16,6 @@ module.exports = {
     'avoid-image-resize': require('./src/rules/avoid-image-resize'),
     'prefer-standard-fonts': require('./src/rules/prefer-standard-fonts'),
     'respect-bf-cache': require('./src/rules/respect-bf-cache'),
+    'multiple-console-log': require('./src/rules/multiple-console-log'),
   }
 };
