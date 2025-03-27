@@ -13,6 +13,7 @@ import shutil
 import datetime
 import random
 import psutil
+import glob
 
 class ZipDownloader:
 	def __init__(self, name, data_folder, zip_name, keep_zip=True, overwrite_zip=False, force_unzip=False):
@@ -226,7 +227,7 @@ class Step:
 		start_time = time.time()
 		output_file = os.path.join(self.folder, f'{self.index}_{self.file_index}.csv')
 		args = [ENERGIBRIDGE, '-o', output_file, '--summary']
-		args.extend(self.chromium.args(self.file))
+		args.extend(self.chromium.args('chrome://newtab'))
 		print(f'> Starting Chromium through Energibridge -> {output_file}')
 		proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
@@ -236,7 +237,7 @@ class Step:
 		print(f'> Opening {self.file}')
 		subprocess.run(self.chromium.args(self.file))
 		# Give time for the tab to load
-		await asyncio.sleep(5)
+		await asyncio.sleep(10)
 		
 		last_tab_id = self.chromium.get_last_tab_id()
 		self.chromium.close_tab(last_tab_id)
@@ -247,9 +248,9 @@ class Step:
 		print('> Closing Chromium')
 		proc.kill()
 		await asyncio.sleep(1)
-		stdout, stderr = proc.communicate()
-		print("> EnergiBridge stderr:")
-		print(stderr.decode('utf-8')) 
+		# stdout, stderr = proc.communicate()
+		# print("> EnergiBridge stderr:")
+		# print(stderr.decode('utf-8')) 
 		self.chromium.close_all_tabs()
 		await asyncio.sleep(5)
 		end_time = time.time()
@@ -304,7 +305,7 @@ class StepSet:
 			await step.run()
 
 			# Give time for the system to cool down
-			await asyncio.sleep(15)
+			await asyncio.sleep(1)
 
 		end_time = time.time()
 		print(f'=> Set {self.index + 1}/{self.n_sets} took {end_time - start_time:.2f} seconds')
@@ -346,7 +347,7 @@ args_def.add_argument('-n', '--n-sets', type=int, help='Number of sets', default
 args_def.add_argument('--add-warmup', action='store_true', help='Round one round as warmup', default=True)
 args_def.add_argument('-e', '--energibridge', type=str, help='Path to Energibridge executable', default=r"C:\Users\20202571\Downloads\energibridge-v0.0.7-x86_64-pc-windows-msvc\energibridge")
 args_def.add_argument('--index', type=int, help='Index of the experiment', default=0)
-args_def.add_argument('file', nargs='+', help='HTML files for testing')
+args_def.add_argument('folder', help='folder with HTML files for testing (recursively looks for files)')
 args = args_def.parse_args()
 
 if __name__ == '__main__':
@@ -362,4 +363,5 @@ if __name__ == '__main__':
 
 	ENERGIBRIDGE = args.energibridge
 
-	asyncio.run(Experiment(OUTPUT_FOLDER, args.file, args.n_sets, args.add_warmup, args.index).run())
+	files = glob.glob(f'{args.folder}/**/*.html', recursive=True)
+	asyncio.run(Experiment(OUTPUT_FOLDER, files, args.n_sets, args.add_warmup, args.index).run())
