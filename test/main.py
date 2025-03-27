@@ -225,7 +225,7 @@ class Step:
 
 	async def run(self):
 		start_time = time.time()
-		output_file = os.path.join(self.folder, f'{self.index}_{self.file_index}.csv')
+		output_file = os.path.join(self.folder, f'{self.index}_{self.file_index}_{os.path.basename(self.file)}.csv')
 		args = [ENERGIBRIDGE, '-o', output_file, '--summary']
 		args.extend(self.chromium.args('chrome://newtab'))
 		print(f'> Starting Chromium through Energibridge -> {output_file}')
