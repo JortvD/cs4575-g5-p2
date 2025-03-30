@@ -1,0 +1,50 @@
+<div id="rule-applied">
+  <div class="content-container">
+    <div >Element</div>
+  </div>
+</div>
+
+<script>
+  const foo = {
+    name: 'foo',
+    log: function() {
+      console.log(this.name);
+    },
+    data: {
+      hobbies: ['reading', 'gaming'],
+      location: 'USA'
+    }
+  }
+  const bar = {
+    name: 'bar',
+    log: function() {
+      console.log(this.name);
+    },
+    data: {
+      hobbies: ['cooking', 'traveling'],
+      location: 'Canada'
+    }
+  }
+  const baz = {
+    name: 'baz',
+    log: function() {
+      console.log(this.name);
+    },
+    data: {
+      hobbies: ['sports', 'music'],
+      location: 'UK'
+    }
+  }
+  const qux = {
+    name: 'qux',
+    log: function() {
+      console.log(this.name);
+    },
+    data: {
+      hobbies: ['art', 'photography'],
+      location: 'Australia'
+    }
+  }
+
+  console.log({foo, bar, baz, qux});
+</script> 

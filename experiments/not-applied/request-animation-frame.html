@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SetIntervalAnimation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px auto;
+            max-width: 900px;
+        }
+        .animation-box {
+            width: 400px;
+            height: 300px;
+            border: 1px solid #ccc;
+            position: relative;
+            overflow: hidden;
+            background-color: #f9f9f9;
+        }
+        .ball {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">        
+        <div>
+            <h2>setInterval (16ms)</h2>
+            <div id="intervalBox" class="animation-box">
+                <div id="intervalBall" class="ball" style="background-color: #3498db;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const animationDuration = 5000; // 5 seconds for a complete cycle        
+        const rafBall = document.getElementById('rafBall');
+        const intervalBall = document.getElementById('intervalBall');        
+        // Animation state
+        let intervalId = null;
+        let intervalStartTime = 0;
+        
+        function animateWithInterval() {
+            if (!intervalStartTime) {
+                intervalStartTime = performance.now();
+            }
+            
+            const now = performance.now();
+            
+            // Calculate elapsed time
+            const progress = (now - intervalStartTime) % animationDuration / animationDuration;
+            
+            updateBallPosition(intervalBall, progress);
+        }
+        
+        function updateBallPosition(ball, progress) {
+            const radius = 100;
+            const centerX = 175;
+            const centerY = 125;
+            
+            const x = centerX + radius * Math.cos(progress * 2 * Math.PI);
+            const y = centerY + radius * Math.sin(progress * 2 * Math.PI);
+            
+            ball.style.left = `${x}px`;
+            ball.style.top = `${y}px`;
+        }
+
+        intervalId = setInterval(animateWithInterval, 16.67);
+
+    </script>
+</body>
+</html>
