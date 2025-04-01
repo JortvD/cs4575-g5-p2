@@ -11,3 +11,5 @@ require("./rules/avoid-resizing-image");
 require("./rules/respect-bf-cache");
 require("./rules/multiple-console-log");
 require("./rules/request-animation-frame");
+require("./rules/avoid-autocomplete");
+require("./rules/check-link-preload");

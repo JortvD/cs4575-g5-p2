@@ -18,5 +18,7 @@ module.exports = {
     'respect-bf-cache': require('./src/rules/respect-bf-cache'),
     'multiple-console-log': require('./src/rules/multiple-console-log'),
     'request-animation-frame': require('./src/rules/request-animation-frame'),
+    'avoid-autocomplete': require('./src/rules/avoid-autocomplete'),
+    'check-link-preload': require('./src/rules/check-link-preload'),
   }
 };
