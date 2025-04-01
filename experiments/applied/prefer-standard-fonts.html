@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prefer Standard Fonts - Violation Example</title>
+    <style>
+        /* This imports non-standard fonts - violates the rule */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans&family=Montserrat&family=Lato&family=Poppins&family=Ubuntu&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        h1 {
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        h2 {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .special-text {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .highlight {
+            font-family: 'Ubuntu', sans-serif;
+        }
+        
+        footer {
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lorem Ipsum Dolor Sit Amet</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor metus vitae nibh feugiat, vel venenatis justo fringilla.</p>
+    
+    <h2>Consectetur Adipiscing Elit</h2>
+    <div class="special-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</div>
+    
+    <div style="font-family: 'Lato', sans-serif;">
+        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.
+    </div>
+    
+    <div class="highlight">
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.
+    </div>
+    
+    <footer>
+        Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat.
+    </footer>
+</body>
+</html>
