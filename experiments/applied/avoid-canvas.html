@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+    .container {
+      text-align: center;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      background-color: white;
+    }
+    h2 {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <canvas id="drawingCanvas" width="500" height="300"></canvas>
+  </div>
+
+  <script>
+    // Initialize canvas
+    const canvas = document.getElementById('drawingCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Draw shapes
+    function drawShapes() {
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw rectangle
+      ctx.fillStyle = '#3498db';
+      ctx.fillRect(50, 50, 120, 80);
+      
+      // Draw circle
+      ctx.beginPath();
+      ctx.fillStyle = '#e74c3c';
+      ctx.arc(250, 90, 50, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Draw triangle
+      ctx.beginPath();
+      ctx.fillStyle = '#2ecc71';
+      ctx.moveTo(400, 50);
+      ctx.lineTo(450, 130);
+      ctx.lineTo(350, 130);
+      ctx.closePath();
+      ctx.fill();
+    }
+    
+    // Initial draw
+    drawShapes();
+  </script>
+</body>
+</html>
