@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BFCache Test Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    #statusBar {
+      background-color: #f0f0f0;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+    button {
+      padding: 8px 16px;
+      margin-right: 10px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .expensive-canvas {
+      border: 1px solid #ccc;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>BFCache Test Page</h1>
+    <div id="statusBar">
+      Status: <span id="status">Page Loaded</span><br>
+      Loading Time: <span id="loadTime">Calculating...</span>
+    </div>
+    <a href="test-back.html">Navigate away</a>
+    
+    <h2>Canvas Animation (expensive rendering)</h2>
+    <canvas id="expensiveCanvas" class="expensive-canvas" width="700" height="400"></canvas>
+    
+  </div>
+
+  <script>
+    const startTime = performance.now();
+    let isAnimating = false;
+    const statusEl = document.getElementById('status');
+    const loadTimeEl = document.getElementById('loadTime');
+    
+    let pageState = {
+      initialLoad: true,
+      visitCount: 1,
+      events: []
+    };
+
+    //window.addEventListener('pagehide', function(e) {
+    //  console.log('Pagehide event triggered');
+    //  e.returnValue = 'Are you sure'; 
+    //  return '';
+    //});    
+    
+    // Load expensive data on page load
+    window.addEventListener('load', function() {
+      const loadTime = (performance.now() - startTime).toFixed(2);
+      loadTimeEl.textContent = loadTime + 'ms';
+      
+      // Create expensive data to consume memory
+      createExpensiveData();
+      
+      // Start with an initial expensive calculation
+      runExpensiveCalculation();
+    });
+    
+    // Listen for bfcache events
+    window.addEventListener('pageshow', function(event) {
+      if (event.persisted) {
+        statusEl.textContent = "Restored from bfcache!";
+        pageState.events.push(`Restored from bfcache at ${new Date().toISOString()}`);
+      } else {
+        statusEl.textContent = "Normal page load";
+      }
+      pageState.visitCount++;
+    });
+    
+    function createExpensiveData() {
+      // Create a 100MB array to consume memory
+      const data = new Array(25 * 1024 * 1024).fill(0).map((_, i) => i);
+      window.expensiveData = data;
+    }
+    
+    function runExpensiveCalculation() {
+      const start = performance.now();
+      statusEl.textContent = "Running expensive calculation...";
+            let result = 0;
+      for (let i = 0; i < 50000000; i++) {
+        result += Math.sin(i * 0.01) * Math.cos(i * 0.01);
+      }
+      
+      const duration = (performance.now() - start).toFixed(2);
+      statusEl.textContent = `Calculation complete: ${result.toFixed(2)}`;
+    }
+    
+    // Expensive canvas rendering
+    function startCanvasAnimation() {
+      if (isAnimating) return;
+      
+      isAnimating = true;
+      const canvas = document.getElementById('expensiveCanvas');
+      const ctx = canvas.getContext('2d');
+      let particleCount = 1000;
+      let particles = [];
+      
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: Math.random() * 2 - 1,
+          vy: Math.random() * 2 - 1,
+          color: `hsl(${Math.random() * 360}, 70%, 60%)`,
+          size: Math.random() * 5 + 2
+        });
+      }
+      
+      function animate() {
+        if (!isAnimating) return;
+        
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Update and draw all particles
+        for (let i = 0; i < particleCount; i++) {
+          const p = particles[i];
+          
+          p.x += p.vx;
+          p.y += p.vy;
+          
+          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+          
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = p.color;
+        }
+        
+        requestAnimationFrame(animate);
+      }      
+      animate();
+    }
+
+    startCanvasAnimation();
+
+  </script>
+</body>
+</html>

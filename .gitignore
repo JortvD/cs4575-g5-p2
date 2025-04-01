@@ -3,3 +3,6 @@
 /data/
 /output/
 .vscode/
+
+test/data
+test/output
