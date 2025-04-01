@@ -296,12 +296,12 @@ class Step:
 				second_url = "https://example.com" 
 				print(f"> Navigating to {second_url}")
 				self.navigate_to_url(second_url)
-				await asyncio.sleep(5)  
+				await asyncio.sleep(3)  
 
 				# Use browser back button to go back to the previous page
 				print("> Navigating back using browser back button")
 				self.navigate_back()
-				await asyncio.sleep(5) 
+				await asyncio.sleep(3) 
 				
 				# Close DevTools connection
 				self.close_devtools_connection()
