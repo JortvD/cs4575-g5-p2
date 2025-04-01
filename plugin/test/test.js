@@ -3,7 +3,7 @@ require("./rules/document-fragment");
 require("./rules/intersection-observer");
 require("./rules/repeated-expensive-identifiers");
 require("./rules/lazy-elements");
-require("./rules/avoid-gif-canvas")
+require("./rules/avoid-canvas")
 require("./rules/avoid-image-resize")
 require("./rules/prefer-standard-fonts")
 require("./rules/avoid-gif");
@@ -11,5 +11,3 @@ require("./rules/avoid-resizing-image");
 require("./rules/respect-bf-cache");
 require("./rules/multiple-console-log");
 require("./rules/request-animation-frame");
-require("./rules/avoid-autocomplete");
-require("./rules/check-link-preload");

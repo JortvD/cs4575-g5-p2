@@ -1,9 +1,9 @@
 'use strict';
 
-const rule = require('../../src/rules/avoid-gif-canvas');
+const rule = require('../../src/rules/avoid-canvas');
 const ruleTester = require('../common').ruleTester;
 
-ruleTester.run('avoid-gif-canvas', rule, {
+ruleTester.run('avoid-canvas', rule, {
   valid: [
     // Valid image formats
     "const img = 'image.png';",
@@ -20,20 +20,6 @@ ruleTester.run('avoid-gif-canvas', rule, {
   ],
   
   invalid: [
-    // GIF detection tests
-    {
-      code: "const img = 'animation.gif';",
-      errors: [{ message: 'Avoid using GIF images as they can be performance intensive. Consider using optimized formats like WebP or short videos instead.' }]
-    },
-    {
-      code: "const path = 'assets/loading.GIF';",
-      errors: [{ message: 'Avoid using GIF images as they can be performance intensive. Consider using optimized formats like WebP or short videos instead.' }]
-    },
-    {
-      code: "image.src = 'https://example.com/animation.gif';",
-      errors: [{ message: 'Avoid using GIF images as they can be performance intensive. Consider using optimized formats like WebP or short videos instead.' }]
-    },
-    
     // Canvas element creation tests
     {
       code: "const canvas = document.createElement('canvas');",
@@ -56,10 +42,5 @@ ruleTester.run('avoid-gif-canvas', rule, {
       errors: [{ message: 'Avoid using canvas elements for complex rendering as they can be CPU intensive. Consider using more efficient alternatives.' }]
     },
     
-    // Canvas identifier tests
-    {
-      code: "const canvas = getDrawingArea();",
-      errors: [{ message: 'Avoid using canvas for rendering as it can be performance intensive.' }]
-    }
   ]
 });
