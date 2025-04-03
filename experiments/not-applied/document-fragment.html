@@ -30,7 +30,7 @@
 
   const measurePerformance = () => {
     const directContainer = document.getElementById('direct-container');
-    const items = createItems(500_000);
+    const items = createItems(100_000);
 
     console.time('Rule Not Applied');
     items.forEach(item => directContainer.appendChild(item));
