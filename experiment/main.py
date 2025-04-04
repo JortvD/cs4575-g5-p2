@@ -15,6 +15,7 @@ import random
 import psutil
 import glob
 
+# Download chromium if not already downloaded.
 class ZipDownloader:
 	def __init__(self, name, data_folder, zip_name, keep_zip=True, overwrite_zip=False, force_unzip=False):
 		self.data_folder = data_folder
@@ -118,7 +119,7 @@ class ChromiumDownloader(ZipDownloader):
 		self.unzip()
 		self.clean_zip()
 	
-
+# Controls the Chromium instance and its respective configurations
 class Chromium:
 	def __init__(self):
 		self.user_folder_name = 'chromium-user-data'
@@ -248,9 +249,7 @@ class Step:
 		print('> Closing Chromium')
 		proc.kill()
 		await asyncio.sleep(1)
-		# stdout, stderr = proc.communicate()
-		# print("> EnergiBridge stderr:")
-		# print(stderr.decode('utf-8')) 
+
 		self.chromium.close_all_tabs()
 		await asyncio.sleep(5)
 		end_time = time.time()
@@ -278,21 +277,6 @@ class StepSet:
 	async def reset_user_data(self):
 		print('> Resetting user data by deleting old folder')
 		self.chromium.create_user_folder()
-		# args = self.chromium.args('chrome://newtab')
-		# print(f'> Starting Chromium to generate user data')
-		# proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		# await asyncio.sleep(15)
-
-		# print('> Closing Chromium gracefully to generate Preferences file')
-		# parent = psutil.Process(proc.pid)
-		# for child in parent.children(recursive=True):
-		# 	try:
-		# 		child.kill()
-		# 	except:
-		# 		break
-		# await asyncio.sleep(1)
-		# self.chromium.close_all_tabs()
-		# await asyncio.sleep(3)
 
 	async def run(self):
 		start_time = time.time()

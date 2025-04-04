@@ -4,5 +4,5 @@
 /output/
 .vscode/
 
-test/data
-test/output
+experiment/data
+experiment/output
